@@ -22,6 +22,7 @@ jobs:
           java-version: 17
 
       - name: Build JAR
+        working-directory: springboot-devops
         run: mvn clean package
 
       - name: Login to Docker Hub
@@ -31,9 +32,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: |
-          docker build -t aryankumar12/springboot-devops:latest .
+        run: docker build -t aryankumar12/springboot-devops:latest ./springboot-devops
 
       - name: Push Docker Image
-        run: |
-          docker push aryankumar12/springboot-devops:latest
+        run: docker push aryankumar12/springboot-devops:latest
